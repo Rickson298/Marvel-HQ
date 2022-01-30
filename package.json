@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "eslint": "^8.8.0",
+    "lint": "next lint",
     "styled-components": "^5.3.3"
   }
 }
