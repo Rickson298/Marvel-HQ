@@ -6,7 +6,7 @@ import {
   CardHQ,
   ContainerCardHq,
   FooterHq,
-  Header
+  Header,
 } from "./styles";
 
 export default function Home() {
@@ -55,10 +55,14 @@ export default function Home() {
           {data.map((item, index) => (
             <>
               <CardHQ
-                onClick={()=>console.log(item)}
+                onClick={() => console.log(item)}
                 key={index}
                 rareItem={index === hqRareId}
-                image={`${item.thumbnail.path}.${item.thumbnail.extension}`}
+                image={
+                  item.thumbnail.path.includes("image_not_available")
+                    ? "/images/imageDefault.jpg"
+                    : `${item.thumbnail.path}.${item.thumbnail.extension}`
+                }
               >
                 <FooterHq rareItem={index === hqRareId}>
                   <span className="hq-title">{item.title}</span>
