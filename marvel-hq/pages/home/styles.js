@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Header = styled.div`
+export const Header = styled.header`
   background: rgba(0, 0, 0, 0.7);
   padding: 25px;
   width: 100%;
@@ -14,7 +14,7 @@ export const Header = styled.div`
     width: 150px;
   }
 `;
-export const ContainerCardHq = styled.div`
+export const ContainerCardHq = styled.main`
   max-width: 100vw;
   background: rgba(0, 0, 0, 0.8);
   display: flex;
@@ -65,7 +65,7 @@ export const CardHQ = styled.div`
     -webkit-box-shadow: -2px -120px 61px -11px rgba(0, 0, 0, 0) inset;
     -moz-box-shadow: -2px -120px 61px -11px rgba(0, 0, 0, 0) inset;
     border: ${({ rareItem }) =>
-      rareItem ? "1px solid gold" : "1px solid white"};
+      rareItem ? "2px solid gold" : "2px solid white"};
   }
   &:hover .hq-title {
     display: none;
