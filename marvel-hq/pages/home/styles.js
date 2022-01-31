@@ -1,9 +1,11 @@
 import styled from "styled-components";
+
 export const Header = styled.div`
   background: rgba(0, 0, 0, 0.7);
   padding: 25px;
   width: 100%;
-  height: 5vh;
+  transition: all ease 0.2s;
+  height: 10vh;
   display: flex;
   position: fixed;
   z-index: 9999;
@@ -21,7 +23,11 @@ export const ContainerCardHq = styled.div`
   justify-content: center;
   padding: 15px 0px 15px 0px;
 `;
+
 export const CardHQ = styled.div`
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -29,41 +35,92 @@ export const CardHQ = styled.div`
   padding: 15px;
   color: white;
   transition: all ease 0.2s;
-  border: 1px solid gray;
+  border: ${({ rareItem }) => (rareItem ? "2px solid gold" : "2px solid gray")};
   background-image: url(${({ image }) => image});
   background-size: contain;
   background-position: top;
   background-repeat: no-repeat;
   width: 230px;
   height: 380px;
-  box-shadow: -2px -64px 61px -11px rgba(0, 0, 0, 0.95) inset;
-  -webkit-box-shadow: -2px -64px 61px -11px rgba(0, 0, 0, 0.95) inset;
-  -moz-box-shadow: -2px -64px 61px -11px rgba(0, 0, 0, 0.95) inset;
+  box-shadow: -2px -120px 61px -11px rgba(0, 0, 0, 0.95) inset;
+  -webkit-box-shadow: -2px -120px 61px -11px rgba(0, 0, 0, 0.95) inset;
+  -moz-box-shadow: -2px -120px 61px -11px rgba(0, 0, 0, 0.95) inset;
+  &::before {
+    content: "";
+    position: absolute;
+    width: 100px;
+    height: 120%;
+    background-color: rgba(255, 255, 255, 0.2);
+    top: 50%;
+    transform: skewX(30deg) translate(-120%, -50%);
+    transition: all 0.2s;
+  }
+
+  &:hover::before {
+    transform: skewX(30deg) translate(150%, -50%);
+    transition-delay: 0.1s;
+  }
   &:hover {
-    box-shadow: -2px -129px 61px -11px rgba(0, 0, 0, 0.88) inset;
-    -webkit-box-shadow: -2px -129px 61px -11px rgba(0, 0, 0, 0.88) inset;
-    -moz-box-shadow: -2px -129px 61px -11px rgba(0, 0, 0, 0.88) inset;
-    transform: scale(1.05);
+    box-shadow: -2px -120px 61px -11px rgba(0, 0, 0, 0) inset;
+    -webkit-box-shadow: -2px -120px 61px -11px rgba(0, 0, 0, 0) inset;
+    -moz-box-shadow: -2px -120px 61px -11px rgba(0, 0, 0, 0) inset;
+    border: ${({ rareItem }) =>
+      rareItem ? "1px solid gold" : "1px solid white"};
+  }
+  &:hover .hq-title {
+    display: none;
+  }
+  &:hover .hq-price {
+    background: white;
+    color: gray;
+    font-weight: 600;
+  }
+  &:hover .rare-hq {
+    background: black;
+    color: gold;
+    font-weight: 600;
+  }
+`;
+
+export const FooterHq = styled.div`
+
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  
+
+  div{
+    display: flex;
+    width:100%;
+    margin-top: 10px;
+    justify-content:space-between;
+    align-items:center;
   }
 
   .hq-title {
-    text-align: start;
     display: flex;
-    justify-content: center;
+    justify-content: start;
     font-weight: 600;
-    width: 250px;
+    transition: all ease 0.1s;
   }
 
   .hq-price {
-    display: block;
-    margin-left: auto;
-    width: max-content;
     border-radius: 15px;
-    margin-top: 5px;
-    background: red;
+    background: black;
+    border: 1px solid gray;
     color: white;
     padding: 5px 15px;
   }
+
+  .rare-hq{
+    display:flex;
+    border: 1px solid gold;
+    align-items:center;
+    color: gold;
+    padding: 5px 15px;
+    border-radius: 15px;s
+  }
+  
 `;
 
 export const CapaPrincipal = styled.div`

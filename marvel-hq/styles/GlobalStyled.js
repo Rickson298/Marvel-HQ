@@ -6,13 +6,16 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     overflow-x:hidden;
   };
+  
   html {
     margin: 0;
     padding: 0;
     font-family:'helvetica';
   }
-        
 
+  *{
+    box-sizing: border-box;
+  }
 `;
 
 export default GlobalStyle;
