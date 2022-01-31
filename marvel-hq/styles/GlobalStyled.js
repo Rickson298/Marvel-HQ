@@ -1,21 +1,37 @@
 import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
-  body {
-    margin: 0;
-    padding: 0;
-    overflow-x:hidden;
-  };
-  
-  html {
-    margin: 0;
-    padding: 0;
-    font-family:'helvetica';
-  }
 
-  *{
-    box-sizing: border-box;
-  }
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+html {
+  margin: 0;
+  padding: 0;
+  font-family: "helvetica";
+}
+
+* {
+  box-sizing: border-box;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: red;
+  border-radius: 15px;
+  border: 1px solid black;
+  transition: all 0.2s linear;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(23, 64, 248);
+}
+
+::-webkit-scrollbar {
+  width: 13px;
+  background-color: black;
+}
 `;
 
 export default GlobalStyle;
