@@ -130,11 +130,6 @@ export default function ContentLoader() {
   justify-content: center;
   padding: 15px 0px 15px 0px;
   `
-
-  let array = [ ]
-  array.length = 8
-  console.log(array)
-
   return (
     <ContainerContentLoader>
       <ContentLoader>
