@@ -67,7 +67,7 @@ export default function Home() {
                 <FooterHq rareItem={index === hqRareId}>
                   <span className="hq-title">{item.title}</span>
                   <div>
-                    <span className="hq-price">R${item.prices[0].price}</span>
+                    <span className="hq-price">R${item.prices[0].price ||= '5.99' }</span>
                     {index == hqRareId && <span className="rare-hq">RARO</span>}
                   </div>
                 </FooterHq>
