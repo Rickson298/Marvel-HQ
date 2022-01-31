@@ -32,6 +32,11 @@ html {
   width: 13px;
   background-color: black;
 }
+
+::-webkit-scrollbar-track {
+  border-radius:30px;
+  background-color: black;
+}
 `;
 
 export default GlobalStyle;

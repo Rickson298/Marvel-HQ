@@ -1,13 +1,12 @@
 import styled from "styled-components";
 
 export const Header = styled.header`
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 1);
+  height: 10%;
   padding: 25px;
   width: 100%;
   transition: all ease 0.2s;
-  height: 10vh;
   display: flex;
-  position: fixed;
   z-index: 9999;
   align-items: center;
   img {
@@ -82,7 +81,7 @@ export const CardHQ = styled.div`
   }
 `;
 
-export const FooterHq = styled.div`
+export const FooterHq = styled.footer`
 
   display: flex;
   flex-direction: column;
@@ -123,7 +122,7 @@ export const FooterHq = styled.div`
   
 `;
 
-export const CapaPrincipal = styled.div`
+export const MainBackground = styled.article`
   width: 100vw;
   height: 100vh;
   background-image: url("https://images7.alphacoders.com/990/thumb-1920-990523.jpg");
@@ -140,3 +139,15 @@ export const CapaPrincipal = styled.div`
     border-radius: 15px;
   }
 `;
+
+export function FooterCardHq({ title, price, index, hqRareId }) {
+  return (
+    <FooterHq>
+      <span className="hq-title">{title}</span>
+      <div>
+        <span className="hq-price">R${price}</span>
+        {index == hqRareId && <span className="rare-hq">RARO</span>}
+      </div>
+    </FooterHq>
+  );
+}
