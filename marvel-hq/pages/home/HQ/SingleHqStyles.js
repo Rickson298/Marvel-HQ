@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Flex } from "../../../styles/DefaultStyles";
 
-export const ContainerHQ = styled(Flex("div","top","center","column"))`
+export const ContainerHQ = styled(Flex("div", "top", "center", "column"))`
   flex-wrap: wrap;
   padding: 50px;
   gap: 50px;

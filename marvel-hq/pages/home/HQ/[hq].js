@@ -5,9 +5,11 @@ import { BsFillArrowLeftCircleFill } from "react-icons/bs";
 import { md5, PUBLIC_KEY, timeStamp } from "../../api/keys/keys";
 import { Header } from "../HomeStyles";
 import {
-  ContainerHQ, ContainerRareHQ, GoBack,
+  ContainerHQ,
+  ContainerRareHQ,
+  GoBack,
   HqInformation,
-  Image
+  Image,
 } from "./SingleHqstyles";
 
 export default function SingleHQ() {

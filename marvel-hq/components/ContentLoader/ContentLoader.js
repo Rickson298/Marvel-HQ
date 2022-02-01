@@ -2,7 +2,6 @@ import styled from "styled-components";
 import { keyframes } from "styled-components";
 
 export default function ContentLoader() {
-
   const loading = keyframes`
   0%{
     transform: skewX(30deg) translate(-120%, -50%); 
@@ -22,7 +21,7 @@ export default function ContentLoader() {
     display: flex;
     flex-direction: column;
     justify-content: end;
-    border: 1px solid darkGray;
+    border: 2px solid darkGray;
 
     .hq-footer-loader {
       width: 100%;
@@ -67,7 +66,7 @@ export default function ContentLoader() {
       overflow: hidden;
       width: 60px;
       height: 25px;
-      border-radius: 5px;
+      border-radius: 25px;
       background: rgba(255, 255, 255, 0.3);
       color: white;
       padding: 5px 15px;
@@ -122,93 +121,24 @@ export default function ContentLoader() {
     }
   `;
 
-  const ContainerContentLoader= styled.div`
-  max-width: 100vw;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
-  justify-content: center;
-  padding: 15px 0px 15px 0px;
-  `
+  const ContainerContentLoader = styled.div`
+    max-width: 100vw;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+  `;
   return (
     <ContainerContentLoader>
-      <ContentLoader>
-        <div className="hq-content-loader"></div>
-        <div className="hq-footer-loader">
-          <div className="hq-title-loader"></div>
-          <div className="hq-price-loader"></div>
-        </div>
-      </ContentLoader>
-      <ContentLoader>
-        <div className="hq-content-loader"></div>
-        <div className="hq-footer-loader">
-          <div className="hq-title-loader"></div>
-          <div className="hq-price-loader"></div>
-        </div>
-      </ContentLoader>
-      <ContentLoader>
-        <div className="hq-content-loader"></div>
-        <div className="hq-footer-loader">
-          <div className="hq-title-loader"></div>
-          <div className="hq-price-loader"></div>
-        </div>
-      </ContentLoader>
-      <ContentLoader>
-        <div className="hq-content-loader"></div>
-        <div className="hq-footer-loader">
-          <div className="hq-title-loader"></div>
-          <div className="hq-price-loader"></div>
-        </div>
-      </ContentLoader>
-      <ContentLoader>
-        <div className="hq-content-loader"></div>
-        <div className="hq-footer-loader">
-          <div className="hq-title-loader"></div>
-          <div className="hq-price-loader"></div>
-        </div>
-      </ContentLoader>
-      <ContentLoader>
-        <div className="hq-content-loader"></div>
-        <div className="hq-footer-loader">
-          <div className="hq-title-loader"></div>
-          <div className="hq-price-loader"></div>
-        </div>
-      </ContentLoader>
-      <ContentLoader>
-        <div className="hq-content-loader"></div>
-        <div className="hq-footer-loader">
-          <div className="hq-title-loader"></div>
-          <div className="hq-price-loader"></div>
-        </div>
-      </ContentLoader>
-      <ContentLoader>
-        <div className="hq-content-loader"></div>
-        <div className="hq-footer-loader">
-          <div className="hq-title-loader"></div>
-          <div className="hq-price-loader"></div>
-        </div>
-      </ContentLoader>
-      <ContentLoader>
-        <div className="hq-content-loader"></div>
-        <div className="hq-footer-loader">
-          <div className="hq-title-loader"></div>
-          <div className="hq-price-loader"></div>
-        </div>
-      </ContentLoader>
-      <ContentLoader>
-        <div className="hq-content-loader"></div>
-        <div className="hq-footer-loader">
-          <div className="hq-title-loader"></div>
-          <div className="hq-price-loader"></div>
-        </div>
-      </ContentLoader>
-      <ContentLoader>
-        <div className="hq-content-loader"></div>
-        <div className="hq-footer-loader">
-          <div className="hq-title-loader"></div>
-          <div className="hq-price-loader"></div>
-        </div>
-      </ContentLoader>
+      {Array.from({ length: 10 }).map(() => (
+        <ContentLoader>
+          <div className="hq-content-loader"></div>
+          <div className="hq-footer-loader">
+            <div className="hq-title-loader"></div>
+            <div className="hq-price-loader"></div>
+          </div>
+        </ContentLoader>
+      ))}
     </ContainerContentLoader>
   );
 }
