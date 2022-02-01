@@ -2,19 +2,23 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import ContentLoader from "../../components/ContentLoader/ContentLoader";
+import { Pagination } from "../../components/Pagination/Pagination";
 import { md5, PUBLIC_KEY, timeStamp } from "../api/keys/keys";
 import {
   CardHQ,
   ContainerCardHq,
-  FooterCardHq, Header,
-  MainBackground
+  FooterCardHq,
+  Header,
+  MainBackground,
 } from "./HomeStyles";
 
 export default function Home() {
-  const [pagination, setPagination] = useState(0);
+  const [offset, setOffset] = useState(0);
   const [hqs, setHqs] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [hqRareId, setHqRareId] = useState();
+  const [currentPage, setCurrentPage] = useState(1);
+
   let router = useRouter();
 
   async function fetchData() {
@@ -24,7 +28,7 @@ export default function Home() {
         data: { results },
       },
     } = await axios.get(
-      `https://gateway.marvel.com/v1/public/comics?ts=${timeStamp}&orderBy=issueNumber&apikey=${PUBLIC_KEY}&hash=${md5}&offset=${pagination}&limit=10`
+      `https://gateway.marvel.com/v1/public/comics?ts=${timeStamp}&orderBy=issueNumber&apikey=${PUBLIC_KEY}&hash=${md5}&offset=${offset}&limit=10`
     );
     setHqs(results);
     setIsLoading(false);
@@ -37,7 +41,11 @@ export default function Home() {
 
   useEffect(() => {
     fetchData();
-  }, [pagination]);
+  }, [offset]);
+
+  useEffect(() => {
+    setOffset((currentPage - 1) * 10);
+  }, [currentPage]);
 
   return (
     <>
@@ -79,6 +87,7 @@ export default function Home() {
             ))}
           </>
         )}
+        <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} />
       </ContainerCardHq>
     </>
   );
