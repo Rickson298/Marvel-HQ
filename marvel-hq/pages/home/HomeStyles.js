@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Flex } from "../../styles/DefaultStyles";
 
 export const Header = styled.header`
   background: rgba(0, 0, 0, 1);
@@ -7,8 +8,10 @@ export const Header = styled.header`
   width: 100%;
   transition: all ease 0.2s;
   display: flex;
+  justify-content: space-between;
   z-index: 9999;
   align-items: center;
+  color: white;
   img {
     width: 150px;
   }
@@ -139,6 +142,34 @@ export const MainBackground = styled.article`
     border-radius: 15px;
   }
 `;
+
+
+export const Cart = styled(Flex("div", "center", "center"))`
+  gap: 15px;
+  position:relative;
+  width: max-content;
+  padding: 15px;
+  cursor:pointer;
+  background: black;
+  .cart-icon {
+    font-size: 24px;
+  }
+`;
+
+export const CartLength = styled.div`
+background:gray;
+position: absolute;
+font-size:12px;
+right:5px;
+top:5px;
+display:flex;
+justify-content:center;
+align-items:center;
+width:20px;
+height:20px;
+color:white;
+border-radius:15px;
+`
 
 export function FooterCardHq({ title, price, index, hqRareId }) {
   return (

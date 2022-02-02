@@ -17,6 +17,9 @@ export function Pagination({ currentPage, setCurrentPage }) {
 
     .page {
       outline: none;
+      display:flex;
+      justify-content:center;
+      align-items:center;
       width: 30px;
       height: 30px;
       border-radius: 100%;
@@ -95,8 +98,9 @@ export function Pagination({ currentPage, setCurrentPage }) {
         >
           Anterior
         </button>
-        {pages.map((item) => (
+        {pages.map((item, index) => (
           <button
+            key={index}
             onClick={() => {
               setCurrentPage(item);
             }}
@@ -107,7 +111,7 @@ export function Pagination({ currentPage, setCurrentPage }) {
         ))}
         <button
           onClick={() => {
-            if (currentPage < 5093) {
+            if (currentPage < 4235) {
               if (currentPage === pages[4]) {
                 setPagination((prevState) => prevState + 5);
                 setCurrentPage((prevState) => prevState + 1);
@@ -122,7 +126,7 @@ export function Pagination({ currentPage, setCurrentPage }) {
         </button>
         <IoIosArrowForward
           onClick={() =>
-            pages[4] < 5093 && setPagination((prevState) => prevState + 5)
+            pages[4] < 4235 && setPagination((prevState) => prevState + 5)
           }
           className="arrow-pagination"
         />

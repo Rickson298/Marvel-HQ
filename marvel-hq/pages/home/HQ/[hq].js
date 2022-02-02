@@ -2,23 +2,29 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { BsFillArrowLeftCircleFill } from "react-icons/bs";
+import { IoMdClose } from "react-icons/io";
+import { useDispatch, useSelector } from "react-redux";
+import styled from "styled-components";
+import { setShoppingCart } from "../../../redux/reducers/cartReducer";
 import { md5, PUBLIC_KEY, timeStamp } from "../../api/keys/keys";
 import { Header } from "../HomeStyles";
 import {
+  Button,
+  Buttons,
   ContainerHQ,
   ContainerRareHQ,
+  DescriptionHQ,
   GoBack,
-  HqInformation,
   Image,
-} from "./SingleHqstyles";
+} from "./styles";
 
 export default function SingleHQ() {
   let router = useRouter();
   const [hq, setHq] = useState([]);
   const [hqId, setHqId] = useState();
-  useEffect(() => {
-    setHqId(router.query.hq);
-  }, [router.query.hq]);
+  const dispatch = useDispatch();
+  const cart = useSelector((state) => state.cart);
+  const [showWarning, setShowWarning] = useState(false);
 
   async function fetchData() {
     let {
@@ -32,15 +38,49 @@ export default function SingleHQ() {
   }
 
   useEffect(() => {
+    setHqId(router.query.hq);
+  }, [router.query.hq]);
+
+  useEffect(() => {
     hqId && fetchData();
   }, [hqId]);
+
+  const WarningMessage = styled.div`
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    position: fixed;
+    width: 350px;
+    transition: all ease 0.2s;
+    right: ${showWarning ? "25px" : "-500px"};
+    bottom: 25px;
+    margin-right: 25px;
+    background: gray;
+    color: white;
+    border-radius: 5px;
+
+    .icon {
+      font-size: 24px;
+      margin-left: auto;
+      color: white;
+      cursor: pointer;
+      &:hover {
+        color: black;
+      }
+    }
+
+    .titleWarning {
+      display: flex;
+      align-items: center;
+    }
+  `;
 
   return (
     <ContainerRareHQ>
       <Header>
         <img src="/images/logoMarvel.jpg" />
       </Header>
-      {hq.map((item) => (
+      {hq.map((hq) => (
         <>
           <GoBack onClick={() => router.back()}>
             <BsFillArrowLeftCircleFill size="30" />
@@ -49,19 +89,61 @@ export default function SingleHQ() {
           <ContainerHQ>
             <Image
               src={
-                item.thumbnail.path.includes("image_not_available")
+                hq.thumbnail.path.includes("image_not_available")
                   ? "/images/imageDefault.jpg"
-                  : `${item.thumbnail.path}.${item.thumbnail.extension}`
+                  : `${hq.thumbnail.path}.${hq.thumbnail.extension}`
               }
             />
-            <HqInformation
-              title={item.title}
-              price={(item.prices[0].price ||= "5.99")}
-              description={item.description}
-            />
+            <DescriptionHQ>
+              <div className="container-title-price">
+                <div className="title-hq">{hq.title}</div>
+                <div className="price-hq">
+                  R${(hq.prices[0].price ||= "5.99")}
+                </div>
+              </div>
+              <div className="description">{hq.description}</div>
+              <Buttons>
+                <Button buy>Comprar</Button>
+                <Button
+                  onClick={() => {
+                    if (cart.items.some((element) => element.id === hq.id)) {
+                      setShowWarning(true);
+                    } else {
+                      dispatch(
+                        setShoppingCart([
+                          ...cart.items,
+                          {
+                            id: hq.id,
+                            title: hq.title,
+                            thumbnail: hq.thumbnail,
+                            quantity: 1,
+                            description: hq.description,
+                            initialPrice:Number(hq.prices[0].price),
+                            price: Number(hq.prices[0].price),
+                          },
+                        ])
+                      );
+                    }
+                  }}
+                >
+                  Adicionar ao Carrinho
+                </Button>
+              </Buttons>
+            </DescriptionHQ>
           </ContainerHQ>
         </>
       ))}
+      <WarningMessage>
+        <div className="titleWarning">
+          Aviso!{" "}
+          <IoMdClose onClick={() => setShowWarning(false)} className="icon" />
+        </div>
+        <p>
+          ITEM ADICIONADO AO CARRINHO O item que você tentou adicionar já existe
+          em seu carrinho, para evitar que você inclua mais itens que realmente
+          quer, selecione a quantidade desejada no carrinho de compras.
+        </p>
+      </WarningMessage>
     </ContainerRareHQ>
   );
 }

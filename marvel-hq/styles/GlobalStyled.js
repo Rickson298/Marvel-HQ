@@ -11,7 +11,7 @@ body {
 html {
   margin: 0;
   padding: 0;
-  font-family: "helvetica";
+  font-family: sans-serif;
 }
 
 * {

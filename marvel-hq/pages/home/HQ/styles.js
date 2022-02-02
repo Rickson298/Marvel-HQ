@@ -53,21 +53,32 @@ export const DescriptionHQ = styled(Flex("div", "start", "start", "column"))`
 
 export const Button = styled.button`
   outline: none;
+  transition: all ease .2s;
   padding: 10px 15px;
   margin-top: 10px;
   font-size: 14px;
   color: white;
-  border: none;
+  border: 1px solid gray;
   text-transform: uppercase;
   background: ${({ buy }) => (buy ? "green" : "rgb(0,0,150)")};
   cursor: pointer;
   border-radius: 25px;
+  &:hover{
+    border:1px solid lightGray;
+  }
 `;
 
 export const Buttons = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 5px;
+
+  .cart {
+    width: 100%;
+    font-size: 20px;
+    margin-left: auto;
+
+  }
 `;
 
 export const GoBack = styled.nav`
@@ -91,29 +102,5 @@ export function Image({ src }) {
       <img src={src} />
     </ContainerImage>
   );
-}
+};
 
-export function HqInformation({ title, price, description }) {
-  return (
-    <DescriptionHQ>
-      <div className="container-title-price">
-        <div className="title-hq">{title}</div>
-        <div className="price-hq">R${price}</div>
-      </div>
-      <div className="description">{description}</div>
-      <Buttons>
-        <Button buy>Comprar</Button>
-        <Button>Adicionar ao Carrinho</Button>
-      </Buttons>
-    </DescriptionHQ>
-  );
-}
-
-export function ButtonsFooter() {
-  return (
-    <Buttons>
-      <Button buy>Comprar</Button>
-      <Button>Adicionar ao Carrinho</Button>
-    </Buttons>
-  );
-}

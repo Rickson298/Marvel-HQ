@@ -130,8 +130,10 @@ export default function ContentLoader() {
   `;
   return (
     <ContainerContentLoader>
-      {Array.from({ length: 10 }).map(() => (
-        <ContentLoader>
+      {Array.from({ length: 14 }).map((_,index) => (
+        <ContentLoader
+        
+        key={index}>
           <div className="hq-content-loader"></div>
           <div className="hq-footer-loader">
             <div className="hq-title-loader"></div>
