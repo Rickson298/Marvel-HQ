@@ -1,38 +1,6 @@
 import styled from "styled-components";
 import { Flex } from "../../styles/DefaultStyles";
 
-export const Header = styled.header`
-  background: rgba(0, 0, 0, 1);
-  height: 10%;
-  padding: 25px;
-  width: 100%;
-  transition: all ease 0.2s;
-  display: flex;
-  justify-content: space-between;
-  z-index: 9999;
-  align-items: center;
-  color: white;
-  img {
-    width: 150px;
-  }
-`;
-export const ContainerCardHq = styled.main`
-  max-width: 100vw;
-  background: rgba(0, 0, 0, 0.8);
-  display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
-  justify-content: center;
-  padding: 15px 0px 15px 0px;
-
-  .marvelComics{
-    width:100%;
-    font-size:26px;
-    color:white;
-    padding-left:25px;
-  }
-`;
-
 export const CardHQ = styled.div`
   cursor: pointer;
   position: relative;
@@ -41,10 +9,9 @@ export const CardHQ = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: end;
-  // padding: 15px;
   color: white;
   transition: all ease 0.2s;
-  border: ${({ rareItem }) => (rareItem ? "2px solid gold" : "2px solid gray")};
+  border: 2px solid gray;
   background-image: url(${({ image }) => image});
   background-size: contain;
   background-position: top;
@@ -73,9 +40,7 @@ export const CardHQ = styled.div`
     box-shadow: -2px -120px 61px -11px rgba(0, 0, 0, 0) inset;
     -webkit-box-shadow: -2px -120px 61px -11px rgba(0, 0, 0, 0) inset;
     -moz-box-shadow: -2px -120px 61px -11px rgba(0, 0, 0, 0) inset;
-    border: ${({ rareItem }) =>
-      rareItem ? "2px solid gold" : "2px solid white"};
-  }
+    border: 2px solid white;
   &:hover .hq-title {
     display: none;
   }
@@ -84,30 +49,24 @@ export const CardHQ = styled.div`
     color: gray;
     font-weight: 600;
   }
-  &:hover .rare-hq {
-    background: black;
-    color: gold;
-    font-weight: 600;
-  }
+
 `;
 
 export const FooterHq = styled.footer`
-
   display: flex;
   flex-direction: column;
-  justify-content:end;
+  justify-content: end;
   width: 100%;
-  padding:15px;
-  height:100%;
-  z-index:99999;
-  
+  padding: 15px;
+  height: 100%;
+  z-index: 99999;
 
-  div{
+  div {
     display: flex;
-    width:100%;
+    width: 100%;
     margin-top: 10px;
-    justify-content:space-between;
-    align-items:center;
+    justify-content: space-between;
+    align-items: center;
   }
 
   .hq-title {
@@ -124,21 +83,10 @@ export const FooterHq = styled.footer`
     color: white;
     padding: 5px 15px;
   }
-
-  .rare-hq{
-    display:flex;
-    border: 1px solid gold;
-    align-items:center;
-    color: gold;
-    padding: 5px 15px;
-    border-radius: 15px;s
-  }
-  
 `;
 
 export const MainBackground = styled.article`
   width: 100vw;
-  height: 100vh;
   background-image: url("https://images7.alphacoders.com/990/thumb-1920-990523.jpg");
   background-position: center;
   background-size: cover;
@@ -147,59 +95,70 @@ export const MainBackground = styled.article`
   justify-content: start;
   align-items: center;
   position: relative;
+  @media (max-width: 420px) {
+    background: black;
+  }
 
   .marvel-logo {
     margin-left: 250px;
     border-radius: 15px;
   }
 
-  .backgroundEscuro{
-    width:100%;
-    height:100%;
-    background: rgba(0,0,0,0.5)
+  .marvel-comics {
+    width: 100%;
+    font-size: 26px;
+    color: white;
+    padding-left: 25px;
   }
 `;
 
+export const Main = styled.main`
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+  padding: 15px 0px 15px 0px;
+`;
 
 export const Cart = styled(Flex("div", "center", "center"))`
   gap: 15px;
-  position:relative;
+  position: relative;
   width: max-content;
   padding: 15px;
-  cursor:pointer;
-  &:hover .cart-icon{
-    font-size:30px;
+  cursor: pointer;
+  &:hover .cart-icon {
+    font-size: 30px;
   }
   .cart-icon {
-    transition:all ease .2s;
+    transition: all ease 0.2s;
     font-size: 24px;
   }
 `;
 
 export const CartLength = styled.div`
-background:gray;
-position: absolute;
-font-size:12px;
-right:5px;
-top:5px;
-display:flex;
-justify-content:center;
-align-items:center;
-width:20px;
-height:20px;
-color:white;
-border-radius:15px;
-`
+  background: gray;
+  position: absolute;
+  font-size: 12px;
+  right: 5px;
+  top: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20px;
+  height: 20px;
+  color: white;
+  border-radius: 15px;
+`;
 
-export function FooterCardHq({ title, price, index, hqRareId, onClick }) {
+export function FooterCardHq({ title, price, index, onClick }) {
   return (
-    <FooterHq
-    onClick={onClick}
-    >
+    <FooterHq onClick={onClick}>
       <span className="hq-title">{title}</span>
       <div>
         <span className="hq-price">R${price}</span>
-        {index == hqRareId && <span className="rare-hq">RARO</span>}
       </div>
     </FooterHq>
   );

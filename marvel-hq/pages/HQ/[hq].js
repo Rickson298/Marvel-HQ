@@ -2,21 +2,19 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { BsFillArrowLeftCircleFill } from "react-icons/bs";
-import { IoMdClose } from "react-icons/io";
-import { RiShoppingBag3Fill } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
-import styled from "styled-components";
-import { setShoppingCart } from "../../../redux/reducers/cartReducer";
-import { md5, PUBLIC_KEY, timeStamp } from "../../api/keys/keys";
-import { Cart, CartLength, Header } from "../styles";
+import Header from "../../components/Header/Header";
+import { setShoppingCart } from "../../redux/reducers/cartReducer";
+import { md5, PUBLIC_KEY, timeStamp } from "../api/keys/keys";
 import {
   Button,
   Buttons,
-  ContainerHQ,
-  ContainerRareHQ,
+  ContainerCardItem,
   DescriptionHQ,
   GoBack,
+  HQ,
   Image,
+  Message
 } from "./styles";
 
 export default function SingleHQ() {
@@ -25,7 +23,7 @@ export default function SingleHQ() {
   const [hqId, setHqId] = useState();
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
-  const [showWarning, setShowWarning] = useState(false);
+  const [warningAddedItem, setWarningAddedItem] = useState(false);
   const [addedItem, setAddedItem] = useState(false);
 
   async function fetchData() {
@@ -47,54 +45,24 @@ export default function SingleHQ() {
     hqId && fetchData();
   }, [hqId]);
 
-  const WarningMessage = styled.div`
-    display: flex;
-    flex-direction: column;
-    padding: 15px;
-    position: fixed;
-    width: 350px;
-    transition: all ease 0.2s;
-    right: ${showWarning ? "25px" : "-500px"};
-    bottom: 25px;
-    margin-right: 25px;
-    background: gray;
-    color: white;
-    border-radius: 5px;
-
-    .icon {
-      font-size: 24px;
-      margin-left: auto;
-      color: white;
-      cursor: pointer;
-      &:hover {
-        color: black;
-      }
-    }
-
-    .titleWarning {
-      display: flex;
-      align-items: center;
-    }
-  `;
+  useEffect(() => {
+    (addedItem || warningAddedItem) &&
+      setTimeout(() => {
+        setAddedItem(false);
+        setWarningAddedItem(false);
+      }, 2000);
+  }, [addedItem, warningAddedItem]);
 
   return (
-    <ContainerRareHQ>
-      <Header>
-        <img src="/images/logoMarvel.jpg" />
-        <Cart onClick={() => router.push("/MeuCarrinho")}>
-          {addedItem && <>Item adicionado ao seu carrinho</>}
-          {showWarning && <>Este item já foi adicionado ao seu carrinho</>}
-          <RiShoppingBag3Fill className="cart-icon" />
-          <CartLength>{cart.items.length}</CartLength>
-        </Cart>
-      </Header>
+    <ContainerCardItem>
+      <Header></Header>
       {hq.map((hq) => (
         <>
           <GoBack onClick={() => router.push("/home")}>
             <BsFillArrowLeftCircleFill size="30" />
             Voltar
           </GoBack>
-          <ContainerHQ>
+          <HQ>
             <Image
               src={
                 hq.thumbnail.path.includes("image_not_available")
@@ -115,7 +83,7 @@ export default function SingleHQ() {
                 <Button
                   onClick={() => {
                     if (cart.items.some((element) => element.id === hq.id)) {
-                      setShowWarning(true);
+                      setWarningAddedItem(true);
                       setAddedItem(false);
                     } else {
                       setAddedItem(true);
@@ -139,21 +107,18 @@ export default function SingleHQ() {
                   Adicionar ao Carrinho
                 </Button>
               </Buttons>
+              {(addedItem || warningAddedItem) && (
+                <Message addedItem={addedItem}>
+                  {addedItem && <>Item adicionado ao seu carrinho</>}
+                  {warningAddedItem && (
+                    <>Este item já foi adicionado ao seu carrinho</>
+                  )}
+                </Message>
+              )}
             </DescriptionHQ>
-          </ContainerHQ>
+          </HQ>
         </>
       ))}
-      <WarningMessage>
-        <div className="titleWarning">
-          Aviso!{" "}
-          <IoMdClose onClick={() => setShowWarning(false)} className="icon" />
-        </div>
-        <p>
-          O item que você tentou adicionar já existe em seu carrinho, para
-          evitar que você inclua mais itens do que realmente quer, selecione a
-          quantidade desejada no carrinho de compras.
-        </p>
-      </WarningMessage>
-    </ContainerRareHQ>
+    </ContainerCardItem>
   );
 }

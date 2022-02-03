@@ -13,13 +13,16 @@ export function Pagination({ currentPage, setCurrentPage }) {
     padding: 10px;
     border: 1px solid gray;
     width: max-content;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(10px);
     border-radius: 20px;
 
     .page {
       outline: none;
-      display:flex;
-      justify-content:center;
-      align-items:center;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
       width: 30px;
       height: 30px;
       border-radius: 100%;
@@ -64,6 +67,7 @@ export function Pagination({ currentPage, setCurrentPage }) {
   `;
 
   const ContainerPagination = styled(Flex("footer", "center", "center"))`
+    backgroud: rgba(255, 255, 255, 0.6);
     width: 100vw;
   `;
 
