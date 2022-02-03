@@ -24,6 +24,13 @@ export const ContainerCardHq = styled.main`
   gap: 15px;
   justify-content: center;
   padding: 15px 0px 15px 0px;
+
+  .marvelComics{
+    width:100%;
+    font-size:26px;
+    color:white;
+    padding-left:25px;
+  }
 `;
 
 export const CardHQ = styled.div`
@@ -34,7 +41,7 @@ export const CardHQ = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: end;
-  padding: 15px;
+  // padding: 15px;
   color: white;
   transition: all ease 0.2s;
   border: ${({ rareItem }) => (rareItem ? "2px solid gold" : "2px solid gray")};
@@ -88,7 +95,11 @@ export const FooterHq = styled.footer`
 
   display: flex;
   flex-direction: column;
+  justify-content:end;
   width: 100%;
+  padding:15px;
+  height:100%;
+  z-index:99999;
   
 
   div{
@@ -141,6 +152,12 @@ export const MainBackground = styled.article`
     margin-left: 250px;
     border-radius: 15px;
   }
+
+  .backgroundEscuro{
+    width:100%;
+    height:100%;
+    background: rgba(0,0,0,0.5)
+  }
 `;
 
 
@@ -150,8 +167,11 @@ export const Cart = styled(Flex("div", "center", "center"))`
   width: max-content;
   padding: 15px;
   cursor:pointer;
-  background: black;
+  &:hover .cart-icon{
+    font-size:30px;
+  }
   .cart-icon {
+    transition:all ease .2s;
     font-size: 24px;
   }
 `;
@@ -171,9 +191,11 @@ color:white;
 border-radius:15px;
 `
 
-export function FooterCardHq({ title, price, index, hqRareId }) {
+export function FooterCardHq({ title, price, index, hqRareId, onClick }) {
   return (
-    <FooterHq>
+    <FooterHq
+    onClick={onClick}
+    >
       <span className="hq-title">{title}</span>
       <div>
         <span className="hq-price">R${price}</span>

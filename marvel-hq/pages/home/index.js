@@ -1,29 +1,25 @@
 import axios from "axios";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { RiShoppingBag3Fill } from "react-icons/ri";
+import { useDispatch, useSelector } from "react-redux";
 import ContentLoader from "../../components/ContentLoader/ContentLoader";
 import { Pagination } from "../../components/Pagination/Pagination";
 import { md5, PUBLIC_KEY, timeStamp } from "../api/keys/keys";
-import { RiShoppingBag3Fill } from "react-icons/ri";
 import {
   CardHQ,
-  Cart,
-  CartItems,
-  CartLength,
+  Cart, CartLength,
   ContainerCardHq,
   FooterCardHq,
   Header,
-  MainBackground,
-} from "./HomeStyles";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { setShoppingCart } from "../../redux/reducers/cartReducer";
+  MainBackground
+} from "./styles";
 
 export default function Home() {
   const [offset, setOffset] = useState(0);
   const [hqs, setHqs] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [hqRareId, setHqRareId] = useState();
+  const [hqRareIndex, setHqRareIndex] = useState();
   const [currentPage, setCurrentPage] = useState(1);
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
@@ -41,7 +37,7 @@ export default function Home() {
     );
     setHqs(results);
     setIsLoading(false);
-    setHqRareId(Math.floor(Math.random() * hqs.length));
+    setHqRareIndex(Math.floor(Math.random() * hqs.length));
   }
 
   useEffect(() => {
@@ -56,18 +52,28 @@ export default function Home() {
     setOffset((currentPage - 1) * 14);
   }, [currentPage]);
 
+  if (hqs[hqRareIndex]) {
+    hqs[hqRareIndex].rare = true;
+  }
+
+  
+  
+  
+
+
   return (
     <>
       <Header>
         <img src="/images/logoMarvel.jpg" />
-        <Cart
-        onClick={() => router.push(`MeuCarrinho`)}
-        >
+        <Cart onClick={() => router.push("/MeuCarrinho")}>
           <RiShoppingBag3Fill className="cart-icon" />
           <CartLength>{cart.items.length}</CartLength>
         </Cart>
       </Header>
       <MainBackground>
+        <div className="backgroundEscuro">
+          Teste
+        </div>
         {/* <img
           className="marvel-logo"
           src="https://th.bing.com/th/id/OIP.FHzX-n7QNC-0mR-qRSiUFQHaEw?pid=ImgDet&rs=1"
@@ -78,25 +84,27 @@ export default function Home() {
           <ContentLoader />
         ) : (
           <>
+          <span className="marvelComics">Marvel Comics</span>
             {hqs.map((item, index) => (
               <>
                 <CardHQ
                   key={index}
                   title={item.title}
-                  onClick={() => router.push(`home/HQ/${item.id}`)}
                   key={index}
-                  rareItem={index === hqRareId}
+                  rareItem={item.rare}
                   image={
                     item.thumbnail.path.includes("image_not_available")
                       ? "/images/imageDefault.jpg"
                       : `${item.thumbnail.path}.${item.thumbnail.extension}`
                   }
                 >
+                  
                   <FooterCardHq
                     title={item.title}
+                    onClick={() => router.push(`home/HQ/${item.id}`)}
                     price={(item.prices[0].price ||= "5.99")}
                     index={index}
-                    hqRareId={hqRareId}
+                    hqRareId={hqRareIndex}
                   />
                 </CardHQ>
               </>

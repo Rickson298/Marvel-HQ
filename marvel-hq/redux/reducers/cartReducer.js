@@ -11,10 +11,17 @@ export const slice = createSlice({
     },
     setUpdateCart: (state, action) => {
       state.items[action.payload.index].quantity = action.payload.quantity;
-      state.items[action.payload.index].price = action.payload.price * state.items[action.payload.index].quantity ;
+      state.items[action.payload.index].price =
+        action.payload.price * state.items[action.payload.index].quantity;
+    },
+    setRemoveCartItem: (state, action) => {
+      state.items = state.items.filter(
+        (element) => element.id !== action.payload.id
+      );
     },
   },
 });
 
-export const { setShoppingCart, setUpdateCart } = slice.actions;
+export const { setShoppingCart, setUpdateCart, setRemoveCartItem } =
+  slice.actions;
 export default slice.reducer;

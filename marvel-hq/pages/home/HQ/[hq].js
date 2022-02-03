@@ -3,11 +3,12 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { BsFillArrowLeftCircleFill } from "react-icons/bs";
 import { IoMdClose } from "react-icons/io";
+import { RiShoppingBag3Fill } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { setShoppingCart } from "../../../redux/reducers/cartReducer";
 import { md5, PUBLIC_KEY, timeStamp } from "../../api/keys/keys";
-import { Header } from "../HomeStyles";
+import { Cart, CartLength, Header } from "../styles";
 import {
   Button,
   Buttons,
@@ -25,6 +26,7 @@ export default function SingleHQ() {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
   const [showWarning, setShowWarning] = useState(false);
+  const [addedItem, setAddedItem] = useState(false);
 
   async function fetchData() {
     let {
@@ -79,10 +81,16 @@ export default function SingleHQ() {
     <ContainerRareHQ>
       <Header>
         <img src="/images/logoMarvel.jpg" />
+        <Cart onClick={() => router.push("/MeuCarrinho")}>
+          {addedItem && <>Item adicionado ao seu carrinho</>}
+          {showWarning && <>Este item já foi adicionado ao seu carrinho</>}
+          <RiShoppingBag3Fill className="cart-icon" />
+          <CartLength>{cart.items.length}</CartLength>
+        </Cart>
       </Header>
       {hq.map((hq) => (
         <>
-          <GoBack onClick={() => router.back()}>
+          <GoBack onClick={() => router.push("/home")}>
             <BsFillArrowLeftCircleFill size="30" />
             Voltar
           </GoBack>
@@ -108,7 +116,9 @@ export default function SingleHQ() {
                   onClick={() => {
                     if (cart.items.some((element) => element.id === hq.id)) {
                       setShowWarning(true);
+                      setAddedItem(false);
                     } else {
+                      setAddedItem(true);
                       dispatch(
                         setShoppingCart([
                           ...cart.items,
@@ -118,7 +128,7 @@ export default function SingleHQ() {
                             thumbnail: hq.thumbnail,
                             quantity: 1,
                             description: hq.description,
-                            initialPrice:Number(hq.prices[0].price),
+                            initialPrice: Number(hq.prices[0].price),
                             price: Number(hq.prices[0].price),
                           },
                         ])
@@ -139,9 +149,9 @@ export default function SingleHQ() {
           <IoMdClose onClick={() => setShowWarning(false)} className="icon" />
         </div>
         <p>
-          ITEM ADICIONADO AO CARRINHO O item que você tentou adicionar já existe
-          em seu carrinho, para evitar que você inclua mais itens que realmente
-          quer, selecione a quantidade desejada no carrinho de compras.
+          O item que você tentou adicionar já existe em seu carrinho, para
+          evitar que você inclua mais itens do que realmente quer, selecione a
+          quantidade desejada no carrinho de compras.
         </p>
       </WarningMessage>
     </ContainerRareHQ>
