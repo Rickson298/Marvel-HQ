@@ -93,7 +93,7 @@ export default function MeuCarrinho() {
                     dispatch(setRemoveCartItem({ id: item.id }));
                   } else {
                     dispatch(setRemoveCartItem({ id: item.id }));
-                    router.push("/home");
+                    router.push("/");
                   }
                 }}
                 className="trash"
@@ -104,7 +104,7 @@ export default function MeuCarrinho() {
           );
         })}
         <footer>
-          <div onClick={() => router.push("/home")} className="link">
+          <div onClick={() => router.push("/")} className="link">
             <IoIosArrowBack />
             <span>Continue comprando</span>
           </div>

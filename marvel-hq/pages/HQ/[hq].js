@@ -58,7 +58,7 @@ export default function SingleHQ() {
       <Header></Header>
       {hq.map((hq) => (
         <>
-          <GoBack onClick={() => router.push("/home")}>
+          <GoBack onClick={() => router.push("/")}>
             <BsFillArrowLeftCircleFill size="30" />
             Voltar
           </GoBack>

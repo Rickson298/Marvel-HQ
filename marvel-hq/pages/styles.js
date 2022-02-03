@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Flex } from "../../styles/DefaultStyles";
+import { Flex } from "../styles/DefaultStyles";
 
 export const CardHQ = styled.div`
   cursor: pointer;

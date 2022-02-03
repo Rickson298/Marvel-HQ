@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { Cart, CartLength } from "../../pages/home/styles";
+import { Cart, CartLength } from "../../pages/styles";
 import { RiShoppingBag3Fill } from "react-icons/ri";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";

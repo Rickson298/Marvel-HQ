@@ -1,10 +1,10 @@
 import axios from "axios";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import ContentLoader from "../../components/ContentLoader/ContentLoader";
-import Header from "../../components/Header/Header";
-import { Pagination } from "../../components/Pagination/Pagination";
-import { md5, PUBLIC_KEY, timeStamp } from "../api/keys/keys";
+import ContentLoader from "../components/ContentLoader/ContentLoader";
+import Header from "../components/Header/Header";
+import { Pagination } from "../components/Pagination/Pagination";
+import { md5, PUBLIC_KEY, timeStamp } from "./api/keys/keys"
 import { CardHQ, FooterCardHq, Main, MainBackground } from "./styles";
 
 export default function Home() {
