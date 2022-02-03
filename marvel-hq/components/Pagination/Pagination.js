@@ -98,7 +98,7 @@ export function Pagination({ currentPage, setCurrentPage }) {
               }
             }
           }}
-          class="navigation"
+          className="navigation"
         >
           Anterior
         </button>
@@ -124,7 +124,7 @@ export function Pagination({ currentPage, setCurrentPage }) {
               }
             }
           }}
-          class="navigation"
+          className="navigation"
         >
           Próximo
         </button>

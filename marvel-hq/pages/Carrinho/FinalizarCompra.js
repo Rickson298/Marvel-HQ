@@ -31,7 +31,9 @@ export default function MeuCarrinho() {
         <div className="cart-title">Carrinho de Compras</div>
         {cart.items.map((item, index) => {
           return (
-            <ItemCard>
+            <ItemCard
+            key={index}
+            >
               <img
                 src={
                   item.thumbnail?.path?.includes("image_not_available")

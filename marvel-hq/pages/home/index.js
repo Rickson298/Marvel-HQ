@@ -55,7 +55,6 @@ export default function Home() {
                   <CardHQ
                     key={index}
                     title={item.title}
-                    key={index}
                     image={
                       item.thumbnail.path.includes("image_not_available")
                         ? "/images/imageDefault.jpg"
