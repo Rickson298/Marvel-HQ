@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { Flex } from "../../../styles/DefaultStyles";
+import { Flex } from "../../styles/DefaultStyles";
 
-export const ContainerHQ = styled(Flex("div", "top", "center", "column"))`
+export const HQ = styled(Flex("div", "top", "center", "column"))`
   flex-wrap: wrap;
   padding: 50px;
   gap: 50px;
@@ -20,10 +20,11 @@ export const ContainerImage = styled(Flex("div", "center", "center"))`
   }
 `;
 
-export const ContainerRareHQ = styled.main`
+export const ContainerCardItem = styled.main`
   width: 100vw;
   height: 100vh;
 `;
+
 
 export const DescriptionHQ = styled(Flex("div", "start", "start", "column"))`
   border-top: 1px solid gray;
@@ -53,21 +54,40 @@ export const DescriptionHQ = styled(Flex("div", "start", "start", "column"))`
 
 export const Button = styled.button`
   outline: none;
+  transition: all ease 0.2s;
   padding: 10px 15px;
   margin-top: 10px;
   font-size: 14px;
   color: white;
-  border: none;
+  border: 1px solid gray;
   text-transform: uppercase;
   background: ${({ buy }) => (buy ? "green" : "rgb(0,0,150)")};
   cursor: pointer;
   border-radius: 25px;
+  &:hover {
+    border: 1px solid lightGray;
+  }
 `;
+
+export const Message = styled.div`
+margin-top: 15px;
+background:black;
+padding:15px;
+border-radius:5px;
+border-bottom:5px solid ${({addedItem})=> addedItem ? 'green' : 'yellow'};
+
+`
 
 export const Buttons = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 5px;
+
+  .cart {
+    width: 100%;
+    font-size: 20px;
+    margin-left: auto;
+  }
 `;
 
 export const GoBack = styled.nav`
@@ -90,30 +110,5 @@ export function Image({ src }) {
     <ContainerImage>
       <img src={src} />
     </ContainerImage>
-  );
-}
-
-export function HqInformation({ title, price, description }) {
-  return (
-    <DescriptionHQ>
-      <div className="container-title-price">
-        <div className="title-hq">{title}</div>
-        <div className="price-hq">R${price}</div>
-      </div>
-      <div className="description">{description}</div>
-      <Buttons>
-        <Button buy>Comprar</Button>
-        <Button>Adicionar ao Carrinho</Button>
-      </Buttons>
-    </DescriptionHQ>
-  );
-}
-
-export function ButtonsFooter() {
-  return (
-    <Buttons>
-      <Button buy>Comprar</Button>
-      <Button>Adicionar ao Carrinho</Button>
-    </Buttons>
   );
 }

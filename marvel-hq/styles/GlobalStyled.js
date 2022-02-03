@@ -6,12 +6,12 @@ body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
+  font-family: 'Abeezee', BlinkMacSystemFont, sans-serif;
 }
 
 html {
   margin: 0;
   padding: 0;
-  font-family: "helvetica";
 }
 
 * {

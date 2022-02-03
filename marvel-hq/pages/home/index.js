@@ -2,21 +2,15 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import ContentLoader from "../../components/ContentLoader/ContentLoader";
+import Header from "../../components/Header/Header";
 import { Pagination } from "../../components/Pagination/Pagination";
 import { md5, PUBLIC_KEY, timeStamp } from "../api/keys/keys";
-import {
-  CardHQ,
-  ContainerCardHq,
-  FooterCardHq,
-  Header,
-  MainBackground,
-} from "./HomeStyles";
+import { CardHQ, FooterCardHq, Main, MainBackground } from "./styles";
 
 export default function Home() {
   const [offset, setOffset] = useState(0);
   const [hqs, setHqs] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [hqRareId, setHqRareId] = useState();
   const [currentPage, setCurrentPage] = useState(1);
 
   let router = useRouter();
@@ -28,11 +22,10 @@ export default function Home() {
         data: { results },
       },
     } = await axios.get(
-      `https://gateway.marvel.com/v1/public/comics?ts=${timeStamp}&orderBy=issueNumber&apikey=${PUBLIC_KEY}&hash=${md5}&offset=${offset}&limit=10`
+      `https://gateway.marvel.com/v1/public/comics?ts=${timeStamp}&orderBy=issueNumber&apikey=${PUBLIC_KEY}&hash=${md5}&offset=${offset}&limit=14`
     );
     setHqs(results);
     setIsLoading(false);
-    setHqRareId(Math.floor(Math.random() * hqs.length));
   }
 
   useEffect(() => {
@@ -44,51 +37,48 @@ export default function Home() {
   }, [offset]);
 
   useEffect(() => {
-    setOffset((currentPage - 1) * 10);
+    setOffset((currentPage - 1) * 14);
   }, [currentPage]);
 
   return (
     <>
-      <Header>
-        <img src="/images/logoMarvel.jpg" />
-      </Header>
+      <Header />
       <MainBackground>
-        {/* <img
-          className="marvel-logo"
-          src="https://th.bing.com/th/id/OIP.FHzX-n7QNC-0mR-qRSiUFQHaEw?pid=ImgDet&rs=1"
-        /> */}
-      </MainBackground>
-      <ContainerCardHq>
-        {isLoading ? (
-          <ContentLoader />
-        ) : (
-          <>
-            {hqs.map((item, index) => (
-              <>
-                <CardHQ
-                  title={item.title}
-                  onClick={() => router.push(`home/HQ/${item.id}`)}
-                  key={index}
-                  rareItem={index === hqRareId}
-                  image={
-                    item.thumbnail.path.includes("image_not_available")
-                      ? "/images/imageDefault.jpg"
-                      : `${item.thumbnail.path}.${item.thumbnail.extension}`
-                  }
-                >
-                  <FooterCardHq
+        <Main>
+          <span className="marvel-comics">Marvel Comics</span>
+          {isLoading ? (
+            <ContentLoader />
+          ) : (
+            <>
+              {hqs.map((item, index) => (
+                <>
+                  <CardHQ
+                    key={index}
                     title={item.title}
-                    price={(item.prices[0].price ||= "5.99")}
-                    index={index}
-                    hqRareId={hqRareId}
-                  />
-                </CardHQ>
-              </>
-            ))}
-          </>
-        )}
-        <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} />
-      </ContainerCardHq>
+                    key={index}
+                    image={
+                      item.thumbnail.path.includes("image_not_available")
+                        ? "/images/imageDefault.jpg"
+                        : `${item.thumbnail.path}.${item.thumbnail.extension}`
+                    }
+                  >
+                    <FooterCardHq
+                      title={item.title}
+                      onClick={() => router.push(`/HQ/${item.id}`)}
+                      price={(item.prices[0].price ||= "5.99")}
+                      index={index}
+                    />
+                  </CardHQ>
+                </>
+              ))}
+            </>
+          )}
+          <Pagination
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+          />
+        </Main>
+      </MainBackground>
     </>
   );
 }
