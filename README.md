@@ -2,7 +2,7 @@
 
 Este é um projeto de um site de venda de quadrinhos da marvel, feito com Next.js e Redux para estado global.
 
-#Tecnologias utilizadas
+#Tecnologias e libs utilizadas
 
 * Next.js
 * JavaScript
