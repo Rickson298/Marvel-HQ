@@ -11,19 +11,14 @@ Este é um projeto de um site de venda de quadrinhos da marvel, feito com Next.j
 * Axios
 * React-icons (para ícones)
 
-
-
-## About 
+## Sobre 
 
 Este projeto tem como intúito colocar em prática meus conhecimentos e reforçar minha lógica de programação, em breve o site será refatorado para ser escrito com TypeScript e ter containerização com docker
-
 
 Para rodar o projeto em sua máquina clone o repositório e rode os comandos abaixo em seu terminal
 
     npm install
     npm run dev
-
-
 
 ## Curiosidades
 
