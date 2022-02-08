@@ -2,7 +2,7 @@
   "name": "marvel-hq",
   "private": true,
   "scripts": {
-    "build": "next build",
+    "build": "next build && next export",
     "start": "next start",
     "dev": "next dev"
   },
