@@ -36,3 +36,7 @@ yarn-error.log*
 keys/
 
 .vercel
+
+# SQL Server files
+*.mdf
+*.ldf
