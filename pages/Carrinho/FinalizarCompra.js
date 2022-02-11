@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { ContainerCart } from "../../components/Cart/ContainerCart";
 import { ItemCard } from "../../components/Cart/ItemCard";
 import Header from "../../components/Header/Header";
+import { setUpdateCart, setRemoveCartItem } from "../../redux/reducers/cartReducer"
 
 export default function MeuCarrinho() {
   const cart = useSelector((state) => state.cart);
