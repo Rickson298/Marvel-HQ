@@ -6,12 +6,9 @@ import {
   IoIosRemoveCircleOutline,
 } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
+import { ContainerCart } from "../../components/Cart/ContainerCart";
+import { ItemCard } from "../../components/Cart/ItemCard";
 import Header from "../../components/Header/Header";
-import {
-  setRemoveCartItem,
-  setUpdateCart,
-} from "../../redux/reducers/cartReducer";
-import { ContainerCart, ItemCard } from "./styles";
 
 export default function MeuCarrinho() {
   const cart = useSelector((state) => state.cart);
@@ -31,10 +28,10 @@ export default function MeuCarrinho() {
         <div className="cart-title">Carrinho de Compras</div>
         {cart.items.map((item, index) => {
           return (
-            <ItemCard
-            key={index}
-            >
+            <ItemCard key={index}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
+                alt="capa item"
                 src={
                   item.thumbnail?.path?.includes("image_not_available")
                     ? "/images/imageDefault.jpg"

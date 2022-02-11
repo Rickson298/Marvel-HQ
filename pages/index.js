@@ -1,43 +1,31 @@
-import axios from "axios";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { CardHQ } from "../components/CardHQ/CardHQ";
 import ContentLoader from "../components/ContentLoader/ContentLoader";
+import { FooterCardHq } from "../components/FooterCardHq/FooterCardHq";
 import Header from "../components/Header/Header";
+import { Main } from "../components/Main/Main";
+import { MainBackground } from "../components/MainBackground/MainBackground";
 import { Pagination } from "../components/Pagination/Pagination";
-import { md5, PUBLIC_KEY, timeStamp } from "./api/keys/keys"
-import { CardHQ, FooterCardHq, Main, MainBackground } from "./styles";
+import { useGetApi } from "./api/httpClient";
+import { md5, PUBLIC_KEY, timeStamp } from "./api/keys/keys";
 
 export default function Home() {
   const [offset, setOffset] = useState(0);
-  const [hqs, setHqs] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
+  const [fetchData, results, isLoading] = useGetApi();
 
   let router = useRouter();
-
-  async function fetchData() {
-    setIsLoading(true);
-    let {
-      data: {
-        data: { results },
-      },
-    } = await axios.get(
-      `https://gateway.marvel.com/v1/public/comics?ts=${timeStamp}&orderBy=issueNumber&apikey=${PUBLIC_KEY}&hash=${md5}&offset=${offset}&limit=14`
-    );
-    setHqs(results);
-    setIsLoading(false);
-  }
+  let url = `comics?ts=${timeStamp}&orderBy=issueNumber&apikey=${PUBLIC_KEY}&hash=${md5}&offset=${offset}&limit=14`;
 
   useEffect(() => {
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    fetchData();
+    fetchData(url);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [offset]);
 
   useEffect(() => {
     setOffset((currentPage - 1) * 14);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage]);
 
   return (
@@ -50,7 +38,7 @@ export default function Home() {
             <ContentLoader />
           ) : (
             <>
-              {hqs.map((item, index) => (
+              {results.map((item, index) => (
                 <>
                   <CardHQ
                     key={index}

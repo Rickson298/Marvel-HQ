@@ -1,8 +1,9 @@
 import { useRouter } from "next/router";
-import { Cart, CartLength } from "../../pages/styles";
 import { RiShoppingBag3Fill } from "react-icons/ri";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
+import { CartLength } from "../Cart/CartLength";
+import { Cart } from "../Cart/Cart";
 
 export default function Header({children}) {
   const HeaderComponent = styled.header`
