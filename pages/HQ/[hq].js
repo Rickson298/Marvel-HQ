@@ -3,20 +3,17 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { BsFillArrowLeftCircleFill } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
+import { GoBack } from "../../components/GoBack/GoBack";
+import { Button } from "../../components/Button/Button";
+import { Buttons } from "../../components/Buttons/Buttons";
+import { ContainerCardItem } from "../../components/ContainerCardItem/ContainerCardItem";
+import { DescriptionHQ } from "../../components/DescriptionHQ/DescriptionHQ";
+import { Message } from "../../components/Message/Message";
+import { Image } from "../../components/Image/Image";
+import { HQ } from "../../components/HQ/HQ";
 import Header from "../../components/Header/Header";
 import { setShoppingCart } from "../../redux/reducers/cartReducer";
 import { md5, PUBLIC_KEY, timeStamp } from "../api/keys/keys";
-import {
-  Button,
-  Buttons,
-  ContainerCardItem,
-  DescriptionHQ,
-  GoBack,
-  HQ,
-  Image,
-  Message
-} from "./styles";
-
 export default function SingleHQ() {
   let router = useRouter();
   const [hq, setHq] = useState([]);
@@ -43,6 +40,7 @@ export default function SingleHQ() {
 
   useEffect(() => {
     hqId && fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [hqId]);
 
   useEffect(() => {
@@ -55,7 +53,7 @@ export default function SingleHQ() {
 
   return (
     <ContainerCardItem>
-      <Header></Header>
+      <Header />
       {hq.map((hq) => (
         <>
           <GoBack onClick={() => router.push("/")}>
@@ -64,6 +62,7 @@ export default function SingleHQ() {
           </GoBack>
           <HQ>
             <Image
+              alt="capa"
               src={
                 hq.thumbnail.path.includes("image_not_available")
                   ? "/images/imageDefault.jpg"
