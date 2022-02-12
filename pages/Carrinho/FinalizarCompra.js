@@ -15,10 +15,10 @@ export default function MeuCarrinho() {
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
-  var valorInicial = 0;
+  var initialValue = 0;
   var totalValue = cart.items?.reduce(
-    (acumulador, valorAtual) => acumulador + valorAtual.price,
-    valorInicial
+    (totalValue, currentValue) => totalValue + currentValue.price,
+    initialValue
   );
   const router = useRouter();
 
