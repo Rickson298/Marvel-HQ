@@ -23,16 +23,7 @@ export default function SingleHQ() {
   const [warningAddedItem, setWarningAddedItem] = useState(false);
   const [addedItem, setAddedItem] = useState(false);
 
-  async function fetchData() {
-    let {
-      data: {
-        data: { results },
-      },
-    } = await axios.get(
-      `https://gateway.marvel.com/v1/public/comics/${hqId}?ts=${timeStamp}&apikey=${PUBLIC_KEY}&hash=${md5}`
-    );
-    setHq(results);
-  }
+  let url = `https://gateway.marvel.com/v1/public/comics/${hqId}?ts=${timeStamp}&apikey=${PUBLIC_KEY}&hash=${md5}`;
 
   useEffect(() => {
     setHqId(router.query.hq);
